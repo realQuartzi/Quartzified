@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Quartzified
 {
     public class Math
     {
-
         public class Numbers
         {
-            public static int GetRandomInt(int min = 0, int max = 100)
+            public static long ClampLong(long value, long min, long max)
+            {
+                if (value < min) return min;
+                if (value > max) return max;
+                return value;
+            }
+
+            public static int GetRandom(int min = 0, int max = 100)
             {
                 System.Random r = new System.Random();
 
@@ -16,8 +23,7 @@ namespace Quartzified
 
                 return rnd;
             }
-
-            public static float GetRandomFloat(float min = 0f, float max = 100f)
+            public static float GetRandom(float min = 0f, float max = 100f)
             {
                 System.Random r = new System.Random();
 
@@ -25,8 +31,7 @@ namespace Quartzified
 
                 return rnd;
             }
-
-            public static double GetRandomDouble(double min = 0.0, double max = 100.0)
+            public static double GetRandom(double min = 0.0, double max = 100.0)
             {
                 System.Random r = new System.Random();
 
@@ -35,23 +40,21 @@ namespace Quartzified
                 return rnd;
             }
 
-            public static bool GetRandomIntThreshold(int min = 0, int max = 100, int threshold = 50)
+            public static bool GetRandomThreshold(int min = 0, int max = 100, int threshold = 50)
             {
-                int rnd = GetRandomInt(min, max);
+                int rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
             }
-
-            public static bool GetRandomFloatThreshold(float min = 0f, float max = 100f, float threshold = 50f)
+            public static bool GetRandomThreshold(float min = 0f, float max = 100f, float threshold = 50f)
             {
-                float rnd = GetRandomFloat(min, max);
+                float rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
             }
-
-            public static bool GetRandomDoubleThreshold(double min = 0.0, double max = 100.0, double threshold = 50.0)
+            public static bool GetRandomThreshold(double min = 0.0, double max = 100.0, double threshold = 50.0)
             {
-                double rnd = GetRandomDouble(min, max);
+                double rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
             }
@@ -61,8 +64,8 @@ namespace Quartzified
         {
             public static Vector2 GetRandomVector2Area(Vector2 startPosition, float radius)
             {
-                float rndX = Numbers.GetRandomFloat(-radius, radius);
-                float rndY = Numbers.GetRandomFloat(-radius, radius);
+                float rndX = Numbers.GetRandom(-radius, radius);
+                float rndY = Numbers.GetRandom(-radius, radius);
 
                 Vector2 newPosition = new Vector2(startPosition.x + rndX, startPosition.y + rndY);
 
@@ -71,13 +74,61 @@ namespace Quartzified
 
             public static Vector3 GetRandomVector3Area(Vector3 startPosition, float radius)
             {
-                float rndX = Numbers.GetRandomFloat(-radius, radius);
-                float rndY = Numbers.GetRandomFloat(-radius, radius);
-                float rndZ = Numbers.GetRandomFloat(-radius, radius);
+                float rndX = Numbers.GetRandom(-radius, radius);
+                float rndY = Numbers.GetRandom(-radius, radius);
+                float rndZ = Numbers.GetRandom(-radius, radius);
 
                 Vector3 newPosition = new Vector3(startPosition.x + rndX, startPosition.y + rndY, startPosition.z + rndZ);
 
                 return newPosition;
+            }
+        }
+
+        public static Transform GetNearestTransform(List<Transform> transforms, Vector2 location)
+        {
+            Transform closest = null;
+            foreach (Transform target in transforms)
+            {
+                if (closest == null || Vector2.Distance(target.position, location) < Vector2.Distance(closest.position, location)) closest = target;
+            }
+            return closest;
+        }
+        public static Transform GetNearestTransform(List<Transform> transforms, Vector3 location)
+        {
+            Transform closest = null;
+            foreach (Transform target in transforms)
+            {
+                if (closest == null || Vector3.Distance(target.position, location) < Vector3.Distance(closest.position, location)) closest = target;
+            }
+            return closest;
+        }
+
+        public class Pretty
+        {
+            public static string Seconds(float seconds)
+            {
+                TimeSpan t = TimeSpan.FromSeconds(seconds);
+                string res = "";
+                if (t.Days > 0) res += t.Days + "d";
+                if (t.Hours > 0) res += " " + t.Hours + "h";
+                if (t.Minutes > 0) res += " " + t.Minutes + "m";
+
+                if (t.Milliseconds > 0) res += " " + t.Seconds + "." + (t.Milliseconds / 100) + "s";
+                else if (t.Seconds > 0) res += " " + t.Seconds + "s";
+
+                return res != "" ? res : "0s";
+            }
+
+            public static string Time(float seconds)
+            {
+                TimeSpan t = TimeSpan.FromSeconds(seconds);
+                string res = "";
+
+                res += t.Hours > 0 ? ":" + t.Hours.ToString("00") : "00";
+                res += t.Minutes > 0 ? ":" + t.Minutes.ToString("00") : "00";
+                res += t.Seconds > 0 ? ":" + t.Seconds.ToString("00") : "00";
+
+                return res;
             }
         }
 
