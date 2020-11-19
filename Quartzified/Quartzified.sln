@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartzified", "Quartzified\Quartzified.csproj", "{D090DFA1-26CD-4987-8514-07AD61D4EE54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D090DFA1-26CD-4987-8514-07AD61D4EE54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D090DFA1-26CD-4987-8514-07AD61D4EE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D090DFA1-26CD-4987-8514-07AD61D4EE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D090DFA1-26CD-4987-8514-07AD61D4EE54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8700102-C19B-429D-A300-252DB439CEAF}
+	EndGlobalSection
+EndGlobal
