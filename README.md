@@ -39,6 +39,8 @@ If you use 2.0 your project will require ages to compile script changes... etc.
 
 We currently do not seem to have access to some of the UnityEngine "directories" such as UI and EventSystems, which currently does not allow us to create UI checks & Input and Touch calls for mobile or such.
 
+<hr>
+
 ### Miss matches
 
 We are working on both Universal and Unity seperatlys as they target different version of .Net and therefore missing function in between the Projects can happen. 
