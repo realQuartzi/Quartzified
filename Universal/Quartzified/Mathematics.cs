@@ -2,9 +2,9 @@
 
 namespace Quartzified
 {
-    public class Math
+    public static class Mathematics
     {
-        public class Numbers
+        public static class Numbers
         {
             public static int GetRandomInt(int min = 0, int max = 100)
             {

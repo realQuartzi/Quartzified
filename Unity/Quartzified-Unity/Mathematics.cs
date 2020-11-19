@@ -4,10 +4,20 @@ using UnityEngine;
 
 namespace Quartzified
 {
-    public class Math
+    public class Mathematics
     {
+        /// <summary>
+        /// Functions based around Numbers
+        /// </summary>
         public class Numbers
         {
+            /// <summary>
+            /// Clamp Long between 2 values
+            /// </summary>
+            /// <param name="value">Value to Clamp</param>
+            /// <param name="min">Smallest Number</param>
+            /// <param name="max">Largest Number</param>
+            /// <returns></returns>
             public static long ClampLong(long value, long min, long max)
             {
                 if (value < min) return min;
@@ -15,6 +25,12 @@ namespace Quartzified
                 return value;
             }
 
+            /// <summary>
+            /// Returns a Random int between the min and max(inclusive)
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <returns></returns>
             public static int GetRandom(int min = 0, int max = 100)
             {
                 System.Random r = new System.Random();
@@ -23,6 +39,12 @@ namespace Quartzified
 
                 return rnd;
             }
+            /// <summary>
+            /// Returns a Random float between the min and max
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <returns></returns>
             public static float GetRandom(float min = 0f, float max = 100f)
             {
                 System.Random r = new System.Random();
@@ -31,6 +53,12 @@ namespace Quartzified
 
                 return rnd;
             }
+            /// <summary>
+            /// Returns a Random double between the min and max
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <returns></returns>
             public static double GetRandom(double min = 0.0, double max = 100.0)
             {
                 System.Random r = new System.Random();
@@ -40,18 +68,39 @@ namespace Quartzified
                 return rnd;
             }
 
+            /// <summary>
+            /// Returns True if the number is less than the threshold
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <param name="threshold">Number Threshold</param>
+            /// <returns></returns>
             public static bool GetRandomThreshold(int min = 0, int max = 100, int threshold = 50)
             {
                 int rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
             }
+            /// <summary>
+            /// Returns True if the number is less than the threshold
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <param name="threshold">Number Threshold</param>
+            /// <returns></returns>
             public static bool GetRandomThreshold(float min = 0f, float max = 100f, float threshold = 50f)
             {
                 float rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
             }
+            /// <summary>
+            /// Returns True if the number is less than the threshold
+            /// </summary>
+            /// <param name="min">Smallest number</param>
+            /// <param name="max">Largest number</param>
+            /// <param name="threshold">Number Threshold</param>
+            /// <returns></returns>
             public static bool GetRandomThreshold(double min = 0.0, double max = 100.0, double threshold = 50.0)
             {
                 double rnd = GetRandom(min, max);
@@ -60,9 +109,18 @@ namespace Quartzified
             }
         }
 
+        /// <summary>
+        /// Functions based around Vectors
+        /// </summary>
         public class Vectors
         {
-            public static Vector2 GetRandomVector2Area(Vector2 startPosition, float radius)
+            /// <summary>
+            /// Returns random Coordinate around startPosition
+            /// </summary>
+            /// <param name="startPosition"> Center Point</param>
+            /// <param name="radius"> Area Radius</param>
+            /// <returns></returns>
+            public static Vector2 GetRandomVectorArea(Vector2 startPosition, float radius)
             {
                 float rndX = Numbers.GetRandom(-radius, radius);
                 float rndY = Numbers.GetRandom(-radius, radius);
@@ -71,8 +129,13 @@ namespace Quartzified
 
                 return newPosition;
             }
-
-            public static Vector3 GetRandomVector3Area(Vector3 startPosition, float radius)
+            /// <summary>
+            /// Returns random Coordinate around startPosition
+            /// </summary>
+            /// <param name="startPosition"> Center Point</param>
+            /// <param name="radius"> Area Radius</param>
+            /// <returns></returns>
+            public static Vector3 GetRandomVectorArea(Vector3 startPosition, float radius)
             {
                 float rndX = Numbers.GetRandom(-radius, radius);
                 float rndY = Numbers.GetRandom(-radius, radius);
@@ -84,6 +147,12 @@ namespace Quartzified
             }
         }
 
+        /// <summary>
+        ///  Returns the closest transform from a list
+        /// </summary>
+        /// <param name="transforms">List of Transforms</param>
+        /// <param name="location">Location to determine distance from Transform</param>
+        /// <returns></returns>
         public static Transform GetNearestTransform(List<Transform> transforms, Vector2 location)
         {
             Transform closest = null;
@@ -93,6 +162,12 @@ namespace Quartzified
             }
             return closest;
         }
+        /// <summary>
+        ///  Returns the closest transform from a list
+        /// </summary>
+        /// <param name="transforms">List of Transforms</param>
+        /// <param name="location">Location to determine distance from Transform</param>
+        /// <returns></returns>
         public static Transform GetNearestTransform(List<Transform> transforms, Vector3 location)
         {
             Transform closest = null;
@@ -103,6 +178,9 @@ namespace Quartzified
             return closest;
         }
 
+        /// <summary>
+        /// Make things look nice
+        /// </summary>
         public class Pretty
         {
             public static string Seconds(float seconds)
@@ -131,6 +209,8 @@ namespace Quartzified
                 return res;
             }
         }
+
+
 
     }
 }
