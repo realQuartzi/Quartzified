@@ -5,6 +5,7 @@ namespace Quartzified
 {
     public class Math
     {
+
         public class Numbers
         {
             public static int GetRandomInt(int min = 0, int max = 100)
@@ -79,5 +80,6 @@ namespace Quartzified
                 return newPosition;
             }
         }
+
     }
 }
