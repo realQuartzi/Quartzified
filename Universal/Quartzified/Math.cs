@@ -7,11 +7,11 @@ namespace Quartzified
         public class Numbers
         {
 			public static long ClampLong(long value, long min, long max)
-    		{
-    		    if (value < min) return min;
-    		    if (value > max) return max;
-    		    return value;
-    		}
+			{
+				if (value < min) return min;
+				if (value > max) return max;
+				return value;
+			}
 
             public static int GetRandomInt(int min = 0, int max = 100)
             {
