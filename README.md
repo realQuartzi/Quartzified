@@ -1,1 +1,3 @@
-# Quartzified
+# Quartzified / Utility
+
+C# and Unity Utility Methods & Functions 
