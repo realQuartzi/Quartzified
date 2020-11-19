@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Quartzified-Universal</AssemblyName>
+    <RootNamespace>Quartzified</RootNamespace>
+    <Company>Quartzified</Company>
+    <Authors>Quartzi, ToasterBirb</Authors>
+  </PropertyGroup>
+
+</Project>
