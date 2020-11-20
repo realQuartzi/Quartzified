@@ -134,4 +134,4 @@ do
 done
 
 echo -e "Compiling fixed version!"
-dotnet build $csProjPath && echo -e "\e[1mBuild successfull!\e[0m" || echo -e "\e[1mSomething went wrong... Contact ToasterBirb!\e[0m"
+dotnet build --configuration Release $csProjPath && echo -e "\e[1mBuild successfull!\e[0m" || echo -e "\e[1mSomething went wrong... Contact ToasterBirb!\e[0m"
