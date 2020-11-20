@@ -29,7 +29,6 @@ What ever .Net 2.1 standalone runs on.
 
 
 ## Unity
-=======
 Requires UnityEngine.dll & UnityEngine.UI.dll to be in your project.
 (The UnityEngine.UI.dll is now seperate from UnityEngine.dll & and is available through the package manager!)
 
@@ -41,7 +40,6 @@ When using this DLL make sure you set your target .Net to 4.x
 If you use 2.0 your project will require ages to compile script changes... etc.
 
 We currently do not seem to have access to some of the UnityEngine "directories" such as UI and EventSystems, which currently does not allow us to create UI checks & Input and Touch calls for mobile or such.
-=======
 
 <hr>
 
