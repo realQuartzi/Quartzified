@@ -16,7 +16,7 @@ This Project was made for the convenience of having functions that we use often 
 
 ## Universal
 
-The Universal DLL is compiled with the .Net 2.1 standalone which is compatible with:
+The Universal DLL is compiled with the .Net 2.0 standalone which is compatible with:
 
 - Windows
 - Mac
@@ -24,7 +24,7 @@ The Universal DLL is compiled with the .Net 2.1 standalone which is compatible w
 - IOS?
 - Android?
 
-What ever .Net 2.1 standalone runs on.
+What ever .Net 2.0 standalone runs on.
 
 
 
