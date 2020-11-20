@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Universal generated
+Universal_Generated/
+
 # Test project
 [Tt]est[Pp]roject/
 
