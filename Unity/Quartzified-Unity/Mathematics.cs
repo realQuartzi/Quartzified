@@ -589,7 +589,7 @@ namespace Quartzified
             }
         }
 
-// --> Unity
+//(Unity)
         /// <summary>
         /// Functions based around Vectors
         /// </summary>
@@ -627,9 +627,9 @@ namespace Quartzified
                 return newPosition;
             }
         }
-// Unity <--
+//(!Unity)
 
-// --> Unity
+//(Unity)
         /// <summary>
         ///  Returns the closest transform from a list
         /// </summary>
@@ -660,7 +660,7 @@ namespace Quartzified
             }
             return closest;
         }
-// Unity <--
+//(!Unity)
 
         /// <summary>
         /// Make things look nice
@@ -741,7 +741,7 @@ namespace Quartzified
         /// 2D Direction Property
         /// </summary>
         public enum Direction2D {Up, Down, Left, Right};
-// --> Unity
+//(Unity)
         /// <summary>
         /// Returns the movement Direction in 2D Space
         /// </summary>
@@ -765,7 +765,7 @@ namespace Quartzified
                 return x >= 0 ? Direction2D.Right : Direction2D.Left;
             }
         }
-// Unity <--
+//(!Unity)
         public static Direction2D GetDirection2D(float xOne, float yOne, float xTwo, float yTwo)
         {
             float x = xOne + xTwo;
@@ -788,7 +788,7 @@ namespace Quartzified
         /// 3D Direction Property
         /// </summary>
         public enum Direction3D {Forward, Back, Up, Down, Left, Right};
-// --> Unity
+//(Unity)
         /// <summary>
         /// Return the movement Direction in 3D Space
         /// </summary>
@@ -828,7 +828,7 @@ namespace Quartzified
                 }
             }
         }
-// Unity <--
+//(!Unity)
         public static Direction3D GetDirection3D(float xOne, float yOne, float zOne, float xTwo, float yTwo, float zTwo)
         {
             float x = xOne + xTwo;
