@@ -65,7 +65,7 @@ echo '    <AssemblyName>Quartzified-Universal</AssemblyName>' >> $csProjPath
 echo '    <RootNamespace>Quartzified</RootNamespace>' >> $csProjPath
 echo '    <Company>Quartzified</Company>' >> $csProjPath
 echo '    <Authors>Quartzi, ToasterBirb</Authors>' >> $csProjPath
-echo '    <DocumentationFile>bin\Release\Quartzified-Universal.xml</DocumentationFile>' >> $csProjPath
+echo '    <DocumentationFile>bin\Release\netstandard2.0\Quartzified-Universal.xml</DocumentationFile>' >> $csProjPath
 echo '  </PropertyGroup>' >> $csProjPath
 echo '    ' >> $csProjPath
 echo '</Project>' >> $csProjPath
