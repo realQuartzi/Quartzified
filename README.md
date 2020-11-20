@@ -3,8 +3,6 @@
 
 
 This repository contains the Official open source project for the Quartzified [Universal, Unity] Library, which is brought to you by Quartzi and ToasterBirb.
-Universal will be mainly updated by Quartzi and ToasterBirb.
-Unity will be mainly updated by Quartzi.
 
 <hr>
 
