@@ -4,6 +4,28 @@
 	{
 		public static class Numbers
 		{
+			///<summary>
+			///Return the Sum of all inputs added together
+			///</summary>
+			///<param name="inputs"></param>
+			///<returns></returns>
+			public static int GetSum(int[] inputs)
+			{
+				int sum = 0;
+				for (int i = 0; i < inputs.Length; i++)
+				{
+					sum += inputs[i];
+				}
+				return sum;
+			}
+
+
+			public static int GetAverage(int[] inputs)
+			{
+				int average = GetSum(inputs) / inputs.Length;
+				return average;
+			}
+
 			public static long ClampLong(long value, long min, long max)
 			{
 				if (value < min) return min;
