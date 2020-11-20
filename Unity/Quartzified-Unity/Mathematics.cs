@@ -1,11 +1,491 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Quartzified
 {
     public class Mathematics
     {
+        /// <summary>
+        /// Returns the Sum of all inputs added together
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetSum(int[] inputs)
+        {
+            int sum = 0;
+
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                sum += inputs[i];
+            }
+
+            return sum;
+        }
+        /// <summary>
+        /// Returns the Sum of all inputs added together
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetSum(float[] inputs)
+        {
+            float sum = 0;
+
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                sum += inputs[i];
+            }
+
+            return sum;
+        }
+        /// <summary>
+        /// Returns the Sum of all inputs added together
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetSum(double[] inputs)
+        {
+            double sum = 0;
+
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                sum += inputs[i];
+            }
+
+            return sum;
+        }
+        /// <summary>
+        /// Returns the Sum of all inputs added together
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetSum(decimal[] inputs)
+        {
+            decimal sum = 0;
+
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                sum += inputs[i];
+            }
+
+            return sum;
+        }
+
+        /// <summary>
+        /// Returns the Average (Does not return decimals)
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetAverage(int[] inputs)
+        {
+            int average = GetSum(inputs) / inputs.Length;
+            return average;
+        }
+        /// <summary>
+        /// Returns the Average
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetAverage(float[] inputs)
+        {
+            float average = GetSum(inputs) / inputs.Length;
+            return average;
+        }
+        /// <summary>
+        /// Returns the Average
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetAverage(double[] inputs)
+        {
+            double average = GetSum(inputs) / inputs.Length;
+            return average;
+        }
+        /// <summary>
+        /// Returns the Average
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetAverage(decimal[] inputs)
+        {
+            decimal average = GetSum(inputs) / inputs.Length;
+            return average;
+        }
+
+        /// <summary>
+        /// Returns the Median (Does not return decimals)
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetMedian(int[] inputs)
+        {
+            int[] temp = inputs;
+            Array.Sort(temp);
+
+            int count = temp.Length;
+            if(count == 0)
+            {
+                throw new InvalidOperationException("Empty Collection");
+            }
+            else if(count % 2 == 0)
+            {
+                int a = temp[count / 2 - 1];
+                int b = temp[count / 2];
+                return (a + b) / 2;
+            }
+            else
+            {
+                return temp[count / 2];
+            }
+        }
+        /// <summary>
+        /// Returns the Median
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetMedian(float[] inputs)
+        {
+            float[] temp = inputs;
+            Array.Sort(temp);
+
+            int count = temp.Length;
+            if (count == 0)
+            {
+                throw new InvalidOperationException("Empty Collection");
+            }
+            else if (count % 2 == 0)
+            {
+                float a = temp[count / 2 - 1];
+                float b = temp[count / 2];
+                return (a + b) / 2;
+            }
+            else
+            {
+                return temp[count / 2];
+            }
+        }
+        /// <summary>
+        /// Returns the Median
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetMedian(double[] inputs)
+        {
+            double[] temp = inputs;
+            Array.Sort(temp);
+
+            int count = temp.Length;
+            if (count == 0)
+            {
+                throw new InvalidOperationException("Empty Collection");
+            }
+            else if (count % 2 == 0)
+            {
+                double a = temp[count / 2 - 1];
+                double b = temp[count / 2];
+                return (a + b) / 2;
+            }
+            else
+            {
+                return temp[count / 2];
+            }
+        }
+        /// <summary>
+        /// Returns the Median
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetMedian(decimal[] inputs)
+        {
+            decimal[] temp = inputs;
+            Array.Sort(temp);
+
+            int count = temp.Length;
+            if (count == 0)
+            {
+                throw new InvalidOperationException("Empty Collection");
+            }
+            else if (count % 2 == 0)
+            {
+                decimal a = temp[count / 2 - 1];
+                decimal b = temp[count / 2];
+                return (a + b) / 2m;
+            }
+            else
+            {
+                return temp[count / 2];
+            }
+        }
+
+        /// <summary>
+        /// Returns the Mode
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetMode(int[] inputs)
+        {
+            int mode = 0;
+
+            if(inputs != null && inputs.Length > 0)
+            {
+                Dictionary<int, int> counts = new Dictionary<int, int>();
+
+                foreach(int e in inputs)
+                {
+                    if (counts.ContainsKey(e))
+                        counts[e]++;
+                    else counts.Add(e, 1);
+                }
+
+                int max = 0;
+                foreach(KeyValuePair<int, int> count in counts)
+                {
+                    if(count.Value > max)
+                    {
+                        mode = count.Key;
+                        max = count.Value;
+                    }
+                }
+            }
+
+            return mode;
+        }
+        /// <summary>
+        /// Returns the Mode
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetMode(float[] inputs)
+        {
+            float mode = 0;
+
+            if (inputs != null && inputs.Length > 0)
+            {
+                Dictionary<float, int> counts = new Dictionary<float, int>();
+
+                foreach (float e in inputs)
+                {
+                    if (counts.ContainsKey(e))
+                        counts[e]++;
+                    else counts.Add(e, 1);
+                }
+
+                int max = 0;
+                foreach (KeyValuePair<float, int> count in counts)
+                {
+                    if (count.Value > max)
+                    {
+                        mode = count.Key;
+                        max = count.Value;
+                    }
+                }
+            }
+
+            return mode;
+        }
+        /// <summary>
+        /// Returns the Mode
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetMode(double[] inputs)
+        {
+            double mode = 0;
+
+            if (inputs != null && inputs.Length > 0)
+            {
+                Dictionary<double, int> counts = new Dictionary<double, int>();
+
+                foreach (double e in inputs)
+                {
+                    if (counts.ContainsKey(e))
+                        counts[e]++;
+                    else counts.Add(e, 1);
+                }
+
+                int max = 0;
+                foreach (KeyValuePair<double, int> count in counts)
+                {
+                    if (count.Value > max)
+                    {
+                        mode = count.Key;
+                        max = count.Value;
+                    }
+                }
+            }
+
+            return mode;
+        }
+        /// <summary>
+        /// Returns the Mode
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetMode(decimal[] inputs)
+        {
+            decimal mode = 0;
+
+            if (inputs != null && inputs.Length > 0)
+            {
+                Dictionary<decimal, int> counts = new Dictionary<decimal, int>();
+
+                foreach (decimal e in inputs)
+                {
+                    if (counts.ContainsKey(e))
+                        counts[e]++;
+                    else counts.Add(e, 1);
+                }
+
+                int max = 0;
+                foreach (KeyValuePair<decimal, int> count in counts)
+                {
+                    if (count.Value > max)
+                    {
+                        mode = count.Key;
+                        max = count.Value;
+                    }
+                }
+            }
+
+            return mode;
+        }
+
+        /// <summary>
+        /// Returns the Smallest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetMin(int[] inputs)
+        {
+            int[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[0];
+        }
+        /// <summary>
+        /// Returns the Smallest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetMin(float[] inputs)
+        {
+            float[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[0];
+        }
+        /// <summary>
+        /// Returns the Smallest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetMin(double[] inputs)
+        {
+            double[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[0];
+        }
+        /// <summary>
+        /// Returns the Smallest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetMin(decimal[] inputs)
+        {
+            decimal[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[0];
+        }
+
+        /// <summary>
+        /// Returns the Largest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetMax(int[] inputs)
+        {
+            int[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[temp.Length - 1];
+        }
+        /// <summary>
+        /// Returns the Largest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetMax(float[] inputs)
+        {
+            float[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[temp.Length - 1];
+        }
+        /// <summary>
+        /// Returns the Largest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetMax(double[] inputs)
+        {
+            double[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[temp.Length - 1];
+        }
+        /// <summary>
+        /// Returns the Largest Number
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetMax(decimal[] inputs)
+        {
+            decimal[] temp = inputs;
+            Array.Sort(temp);
+
+            return temp[temp.Length - 1];
+        }
+
+        /// <summary>
+        /// Returns the Range
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static int GetRange(int[] inputs)
+        {
+            return GetMax(inputs) - GetMin(inputs);
+        }
+        /// <summary>
+        /// Returns the Range
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static float GetRange(float[] inputs)
+        {
+            return GetMax(inputs) - GetMin(inputs);
+        }
+        /// <summary>
+        /// Returns the Range
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static double GetRange(double[] inputs)
+        {
+            return GetMax(inputs) - GetMin(inputs);
+        }
+        /// <summary>
+        /// Returns the Range
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public static decimal GetRange(decimal[] inputs)
+        {
+            return GetMax(inputs) - GetMin(inputs);
+        }
+
         /// <summary>
         /// Functions based around Numbers
         /// </summary>
@@ -210,7 +690,169 @@ namespace Quartzified
             }
         }
 
+        public class Endian
+        {
+            /// <summary>
+            /// Converts a Integer into an array of bytes
+            /// </summary>
+            /// <param name="x">Integer to Convert</param>
+            /// <returns></returns>
+            public static byte[] IntToBytes(int x)
+            {
+                return new byte[] 
+                { 
+                    (byte) (x >> 24),
+                    (byte) (x >> 16),
+                    (byte) (x >> 8),
+                    (byte) x
+                };
+            }
+            /// <summary>
+            /// Converts a Interger into an already existing array of bytes. \n 
+            /// <para>Does not allocate a new set of bytes</para>
+            /// </summary>
+            /// <param name="x">Integer to Convert</param>
+            /// <param name="bytes">Byte Array to Fill</param>
+            public static void IntToBytes(int x, byte[] bytes)
+            {
+                bytes[0] = (byte) (x >> 24);
+                bytes[1] = (byte) (x >> 16);
+                bytes[2] = (byte) (x >> 8);
+                bytes[3] = (byte) x;
+            }
 
+            /// <summary>
+            /// Converts Bytes back into an Integer
+            /// </summary>
+            /// <param name="bytes">Byte Array to Convert</param>
+            /// <returns></returns>
+            public static int BytesToInt(byte[] bytes)
+            {
+                return (bytes[0] << 24) | (bytes[1] << 16) | bytes[2] << 8 | bytes[3];
+            }
+            
+        }
 
+        /// <summary>
+        /// 2D Direction Property
+        /// </summary>
+        public enum Direction2D {Up, Down, Left, Right};
+        /// <summary>
+        /// Returns the movement Direction in 2D Space
+        /// </summary>
+        /// <param name="startPoint">First Coordinate Input</param>
+        /// <param name="endPoint">Second Coordinate Input</param>
+        /// <returns></returns>
+        public static Direction2D GetDirection2D(Vector2 startPoint,  Vector2 endPoint)
+        {
+            float x = startPoint.x + endPoint.x;
+            float y = startPoint.y + endPoint.y;
+
+            float xStrength = (float)Math.Pow(x,2);
+            float yStrength = (float)Math.Pow(y,2);
+
+            if (yStrength >= xStrength) // Up Down
+            {
+                return y >= 0 ? Direction2D.Up : Direction2D.Down;
+            }
+            else
+            {
+                return x >= 0 ? Direction2D.Right : Direction2D.Left;
+            }
+        }
+        public static Direction2D GetDirection2D(float xOne, float yOne, float xTwo, float yTwo)
+        {
+            float x = xOne + xTwo;
+            float y = yOne + yTwo;
+
+            float xStrength = (float)Math.Pow(x, 2);
+            float yStrength = (float)Math.Pow(y, 2);
+
+            if (yStrength >= xStrength) // Up Down
+            {
+                return y >= 0 ? Direction2D.Up : Direction2D.Down;
+            }
+            else
+            {
+                return x >= 0 ? Direction2D.Right : Direction2D.Left;
+            }
+        }
+
+        /// <summary>
+        /// 3D Direction Property
+        /// </summary>
+        public enum Direction3D {Forward, Back, Up, Down, Left, Right};
+        /// <summary>
+        /// Return the movement Direction in 3D Space
+        /// </summary>
+        /// <param name="startPoint">First Coordinate Input</param>
+        /// <param name="endPoint">Second Coordinate Input</param>
+        /// <returns></returns>
+        public static Direction3D GetDirection3D(Vector3 startPoint, Vector3 endPoint)
+        {
+            float x = startPoint.x + endPoint.x;
+            float y = startPoint.y + endPoint.y;
+            float z = startPoint.z + endPoint.z;
+
+            float xStrength = (float)Math.Pow(x, 2);
+            float yStrength = (float)Math.Pow(y, 2);
+            float zStrength = (float)Math.Pow(z, 2);
+
+            if(zStrength >= xStrength)
+            {
+                if(zStrength >= yStrength) // Z is Better
+                {
+                    return z >= 0 ? Direction3D.Forward : Direction3D.Back;
+                }
+                else // Y is Better
+                {
+                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+            }
+            else
+            {
+                if(xStrength >= yStrength) // X is Better
+                {
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
+                }
+                else // Y is Better
+                {
+                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+            }
+        }
+        public static Direction3D GetDirection3D(float xOne, float yOne, float zOne, float xTwo, float yTwo, float zTwo)
+        {
+            float x = xOne + xTwo;
+            float y = yOne + yTwo;
+            float z = zOne + zTwo;
+
+            float xStrength = (float)Math.Pow(x, 2);
+            float yStrength = (float)Math.Pow(y, 2);
+            float zStrength = (float)Math.Pow(z, 2);
+
+            if (zStrength >= xStrength)
+            {
+                if (zStrength >= yStrength) // Z is Better
+                {
+                    return z >= 0 ? Direction3D.Forward : Direction3D.Back;
+                }
+                else // Y is Better
+                {
+                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+            }
+            else
+            {
+                if (xStrength >= yStrength) // X is Better
+                {
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
+                }
+                else // Y is Better
+                {
+                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+            }
+        }
     }
 }
