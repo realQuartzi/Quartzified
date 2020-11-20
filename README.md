@@ -29,6 +29,8 @@ What ever .Net 2.1 standalone runs on.
 
 
 ## Unity
+Requires UnityEngine.dll & UnityEngine.UI.dll to be in your project.
+(The UnityEngine.UI.dll is now seperate from UnityEngine.dll & and is available through the package manager!)
 
 The Unity DLL is compiled with the .Net 4.72 Framework which is compatible with:
 
