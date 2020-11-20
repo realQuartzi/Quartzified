@@ -6,6 +6,7 @@
     <RootNamespace>Quartzified</RootNamespace>
     <Company>Quartzified</Company>
     <Authors>Quartzi, ToasterBirb</Authors>
+    <DocumentationFile>bin\Release\Quartzified-Universal.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

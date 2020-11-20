@@ -1,11 +1,31 @@
-﻿using System;
-
-namespace Quartzified
+﻿namespace Quartzified
 {
-	public class Math
+	public static class Mathematics
 	{
-		public class Numbers
+		public static class Numbers
 		{
+			///<summary>
+			///Return the Sum of all inputs added together
+			///</summary>
+			///<param name="inputs"></param>
+			///<returns></returns>
+			public static int GetSum(int[] inputs)
+			{
+				int sum = 0;
+				for (int i = 0; i < inputs.Length; i++)
+				{
+					sum += inputs[i];
+				}
+				return sum;
+			}
+
+
+			public static int GetAverage(int[] inputs)
+			{
+				int average = GetSum(inputs) / inputs.Length;
+				return average;
+			}
+
 			public static long ClampLong(long value, long min, long max)
 			{
 				if (value < min) return min;
@@ -15,7 +35,7 @@ namespace Quartzified
 			
 			public static int GetRandomInt(int min = 0, int max = 100)
 			{
-				Random r = new Random();
+				System.Random r = new System.Random();
 				
 				int rnd = r.Next(min, max + 1);
 				
@@ -24,7 +44,7 @@ namespace Quartzified
 			
 			public static float GetRandomFloat(float min = 0f, float max = 100f)
 			{
-				Random r = new Random();
+				System.Random r = new System.Random();
 				
 				float rnd = (float)(r.NextDouble() * (max - min) + min);
 				
@@ -33,7 +53,7 @@ namespace Quartzified
 			
 			public static double GetRandomDouble(double min = 0.0, double max = 100.0)
 			{
-				Random r = new Random();
+				System.Random r = new System.Random();
 				
 				double rnd = r.NextDouble() * (max - min) + min;
 				
