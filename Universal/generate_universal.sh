@@ -27,7 +27,7 @@ srcFiles=$(find ./ -maxdepth 1 -iname "*.cs" | sed '/Inputs/d; /Sound/d')
 echo -e "Files:\n$srcFiles"
 
 # Create directory for universal version to the workdir. If it already exists, purge it's contents
-universalPath="$workDir/Universal_Generated"
+universalPath="$workDir/Universal-Generated"
 _overWriteWorkDir()
 {
 	echo -n "Universal already exists in the working directory. Overwrite it? [Y/n] "
@@ -86,7 +86,6 @@ done
 _removeMethod()
 {
 	errorFile=$1
-	search=$2
 
 	echo "Patching $errorFile. (Vector methods and classes)"
 	temp=$(cat "$errorFile")
@@ -96,17 +95,16 @@ _removeMethod()
 	for i in $temp
 	do
 		# Found { of the method
-		if [[ "$methodFound" == "true" ]] && [[ $(echo $i | grep "{") ]] && [[ "$indentation" == "null" ]]
+		if [[ "$methodFound" == "false" ]] && [[ "$i" == "//(Unity)" ]]
 		then
-			indentation=$(echo $i | sed 's/{/}/g')
-			echo "Indentation: $(echo "$indentation" | wc -c) [$indentation]"
+			echo "Found method! Removing it..."
+			methodFound="true"
 			continue
 		fi
 
 		# Found } of the method
-		if [[ "$methodFound" == "true" ]] && [[ "$i" == "$indentation" ]]
+		if [[ "$methodFound" == "true" ]] && [[ "$i" == "//(!Unity)" ]]
 		then
-			echo "Ending method deletion at: [$i]. Char count: $(echo $i | wc -c)"
 			methodFound="false"
 			continue
 		fi
@@ -117,12 +115,9 @@ _removeMethod()
 			continue
 		fi
 
-		if [[ $(echo $i | grep "$search") ]]
+		# Normal line. Add to source file
+		if [[ "$methodFound" == "false" ]]
 		then
-			echo "Found method! Removing it..."
-			indentation="null"
-			methodFound="true"
-		else
 			echo "$i" >> $errorFile
 		fi
 	done
@@ -130,58 +125,13 @@ _removeMethod()
 
 echo "Patching source files until no errors exist"
 
-while true
+for i in $srcFiles
 do
-	# Attempt to compile and get error messages
-	echo "Attempting to compile"
-	compilationOutput=$(dotnet build $csProjPath)
-	echo "Following errors detected:"
-	echo "$compilationOutput" | grep "could not be found"
-	errorFile=$(echo "$compilationOutput" | grep -w "error" | head -n 1 | awk '{print $1}' | sed 's/(.*)://g')
-	error=$(echo "$compilationOutput" | grep -w "error" | head -n 1 | awk '{print $9}' | sed "s/'//g")
-
-	echo "Filename: $errorFile"
-	echo "Error: $error"
-	
-	case $error in
-		Transform)
-			echo "Removing Transform methods"
-			_removeMethod $errorFile "public static Transform"
-			;;
-	
-		Vector2 | Vector3)
-			echo "Removing Vector methods"
-			_removeMethod $errorFile "public static Vector"
-	
-			echo "Removing Direction2D methods"
-			_removeMethod $errorFile "public static Direction2D"
-
-			echo "Removing Direction3D methods"
-			_removeMethod $errorFile "public static Direction3D"
-
-			echo "Removing Vector class"
-			_removeMethod $errorFile "public class Vector"
-			;;
-	esac
-	
-	echo -e "Compiling fixed version!"
-	dotnet build $csProjPath && echo -e "\e[1mBuild successfull!\e[0m" || echo -e "\e[1mSomething went wrong... Contact ToasterBirb!\e[0m"
-
-
-	echo -n "Try to patch again? [Y/n] "
-	read answer
-
-	if [[ "$(echo $compilationOutput | grep "Build succeeded")" ]]
+	if [[ $(grep -G "Unity" $i) ]]
 	then
-		case $answer in
-			y | Y)
-				echo "Trying to patch again"
-				;;
-
-			n | N)
-				echo "Quitting..."
-				break;
-				;;
-		esac
+		_removeMethod "$i"
 	fi
 done
+
+echo -e "Compiling fixed version!"
+dotnet build $csProjPath && echo -e "\e[1mBuild successfull!\e[0m" || echo -e "\e[1mSomething went wrong... Contact ToasterBirb!\e[0m"
