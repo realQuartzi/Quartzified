@@ -43,7 +43,6 @@ We currently do not seem to have access to some of the UnityEngine "directories"
 
 <hr>
 
-### Miss matches
+### Production of Universal
 
-We are working on both Universal and Unity seperatlys as they target different version of .Net and therefore missing function in between the Projects can happen. 
-In this case please just tell us if you notice a function missing.
+Universal gets all the functions and methods from Quartzified-Unity by only taking none unity tagged methods and compiling it into its own library.
