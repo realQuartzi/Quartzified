@@ -1,4 +1,6 @@
-﻿namespace Quartzified
+using System;
+
+namespace Quartzified
 {
 	public static class Mathematics
 	{
