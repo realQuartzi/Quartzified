@@ -23,7 +23,20 @@ cd $solutionPath
 cd "Quartzified-Unity"
 
 # Get all files with .cs extension and ignore some files
-srcFiles=$(find ./ -maxdepth 1 -iname "*.cs" | sed '/Inputs/d; /Sound/d')
+srcFiles=$(find ./ -maxdepth 1 -iname "*.cs")
+ignorePath="$workDir/.ignorelist"
+ignoreList=$(cat $ignorePath)
+echo -e "Ignorelist:\n$ignoreList"
+
+# Go through ignore list
+for i in $srcFiles
+do
+	if [[ $(grep $i $ignorePath) ]]
+	then
+		srcFiles=$(echo "$srcFiles" | sed "/$i/d")
+	fi
+done
+
 echo -e "Files:\n$srcFiles"
 
 # Create directory for universal version to the workdir. If it already exists, purge it's contents
