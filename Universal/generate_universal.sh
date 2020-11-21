@@ -25,16 +25,14 @@ cd "Quartzified-Unity"
 # Get all files with .cs extension and ignore some files
 srcFiles=$(find ./ -maxdepth 1 -iname "*.cs")
 ignorePath="$workDir/.ignorelist"
-ignoreList=$(cat $ignorePath)
+ignoreList="$(cat $ignorePath)"
 echo -e "Ignorelist:\n$ignoreList"
 
 # Go through ignore list
-for i in $srcFiles
+for i in $ignoreList
 do
-	if [[ $(grep $i $ignorePath) ]]
-	then
-		srcFiles=$(echo "$srcFiles" | sed "/$i/d")
-	fi
+	temp=$(echo "$srcFiles" | sed "s|$i||g" | sed '/^$/d')
+	srcFiles=$temp
 done
 
 echo -e "Files:\n$srcFiles"
