@@ -1,6 +1,7 @@
 #!/bin/bash
 IFS=$(echo -en "\n\b")
 
+# Argument handling
 case $1 in
 	help | -help | --help | -h)
 		echo "Usage: generate_universal.sh [path to Quartzified Unity solution directory]"
@@ -11,6 +12,7 @@ case $1 in
 		;;
 esac
 
+# If there's a path given, set the path to given path
 [ -z $solutionPath ] && solutionPath=$1
 
 # Get current directory to be used as a working directory
@@ -28,16 +30,23 @@ ignorePath="$workDir/.ignorelist"
 ignoreList="$(cat $ignorePath)"
 echo -e "Ignorelist:\n$ignoreList"
 
-# Go through ignore list
+# Go through ignore list and remove ignored .cs files from the $srfFiles
+# The ignore list is called .ignorelist and should be created into the same directory as the script
+# Example .ignorelist:
+# ./Sound.cs
+# ./Inputs.cs
+
 for i in $ignoreList
 do
+	# Read $srcFiles to temporary variable and remove the line that contains the ignored line
 	temp=$(echo "$srcFiles" | sed "s|$i||g" | sed '/^$/d')
+
 	srcFiles=$temp
 done
 
 echo -e "Files:\n$srcFiles"
 
-# Create directory for universal version to the workdir. If it already exists, purge it's contents
+# Set the path for the directory, where the script will generate Universal sources and compile the DLL
 universalPath="$workDir/Universal-Generated"
 _overWriteWorkDir()
 {
@@ -56,9 +65,11 @@ _overWriteWorkDir()
 			;;
 	esac
 }
+
+# Create directory for universal version to the workdir. If it already exists, purge it's contents
 mkdir "$universalPath" &>/dev/null || _overWriteWorkDir
 
-# Copy src files
+# Copy src files to Universal path
 echo "Copying source files"
 cp $srcFiles $universalPath
 cd $universalPath
@@ -100,12 +111,14 @@ _removeMethod()
 
 	echo "Patching $errorFile. (Vector methods and classes)"
 	temp=$(cat "$errorFile")
+
+	# Remove the original file and reconstruct it line by line
 	rm $errorFile
 	methodFound="false"
 
 	for i in $temp
 	do
-		# Found { of the method
+		# Found the start of Unity method
 		if [[ "$methodFound" == "false" ]] && [[ "$i" == "//(Unity)" ]]
 		then
 			echo "Found method! Removing it..."
@@ -113,20 +126,20 @@ _removeMethod()
 			continue
 		fi
 
-		# Found } of the method
+		# Found the end of Unity method
 		if [[ "$methodFound" == "true" ]] && [[ "$i" == "//(!Unity)" ]]
 		then
 			methodFound="false"
 			continue
 		fi
 
-		# Removing lines between { } of the method
+		# Removing lines inside method
 		if [[ "$methodFound" == "true" ]]
 		then
 			continue
 		fi
 
-		# Normal line. Add to source file
+		# Normal non Unity line. Add to source file
 		if [[ "$methodFound" == "false" ]]
 		then
 			echo "$i" >> $errorFile
@@ -134,8 +147,7 @@ _removeMethod()
 	done
 }
 
-echo "Patching source files until no errors exist"
-
+# Loop trough all source files, and remove Unity methods from files that contain Unity code identifiers
 for i in $srcFiles
 do
 	if [[ $(grep -G "Unity" $i) ]]
@@ -144,5 +156,6 @@ do
 	fi
 done
 
+# Compile the final Release DLL
 echo -e "Compiling fixed version!"
 dotnet build --configuration Release $csProjPath && echo -e "\e[1mBuild successfull!\e[0m" || echo -e "\e[1mSomething went wrong... Contact ToasterBirb!\e[0m"
