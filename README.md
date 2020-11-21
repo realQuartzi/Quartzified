@@ -29,7 +29,7 @@ What ever .Net 2.0 standalone runs on.
 ## Unity
 
 Requires UnityEngine.dll & UnityEngine.UI.dll to be in your project.
-(The UnityEngine.UI.dll is now seperate from UnityEngine.dll & and is available through the package manager!)
+(The UnityEngine.UI.dll is now separate from UnityEngine.dll & and is available through the package manager!)
 
 
 The Unity DLL is compiled with the .Net 4.72 Framework which is compatible with:
@@ -46,3 +46,15 @@ We currently do not seem to have access to some of the UnityEngine "directories"
 ### Production of Universal
 
 Universal gets all the functions and methods from Quartzified-Unity by only taking none unity tagged methods and compiling it into its own library.
+
+You can generate the source files for Universal by running the "generate_universal.sh" script. The script has the following dependencies:
+
+- bash
+- dotnet-sdk
+
+You can generate the source files and compile the Universal DLL with the following commands
+
+```shell
+git clone https://github.com/realQuartzi/Quartzified
+cd ./Quartzified/Universal && ./generate_universal.sh
+```
