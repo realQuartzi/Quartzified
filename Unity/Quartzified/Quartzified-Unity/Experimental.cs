@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Quartzified
 {
-    public class Mathematics
+    public class Experimental
     {
 //(Unity)
         /// <summary>
@@ -21,8 +21,11 @@ namespace Quartzified
             /// <returns></returns>
             public static Vector2 GetRandomVectorArea(Vector2 startPosition, float radius)
             {
-                float rndX = Numbers.GetRandom(-radius, radius);
-                float rndY = Numbers.GetRandom(-radius, radius);
+                System.Random r1 = new System.Random();
+                System.Random r2 = new System.Random();
+
+                float rndX = (float)r1.NextDouble() * (radius - radius) + radius;
+                float rndY = (float)r2.NextDouble() * (radius - radius) + radius;
 
                 Vector2 newPosition = new Vector2(startPosition.x + rndX, startPosition.y + rndY);
 
@@ -36,9 +39,13 @@ namespace Quartzified
             /// <returns></returns>
             public static Vector3 GetRandomVectorArea(Vector3 startPosition, float radius)
             {
-                float rndX = Numbers.GetRandom(-radius, radius);
-                float rndY = Numbers.GetRandom(-radius, radius);
-                float rndZ = Numbers.GetRandom(-radius, radius);
+                System.Random r1 = new System.Random();
+                System.Random r2 = new System.Random();
+                System.Random r3 = new System.Random();
+
+                float rndX = (float)r1.NextDouble() * (radius - radius) + radius;
+                float rndY = (float)r2.NextDouble() * (radius - radius) + radius;
+                float rndZ = (float)r3.NextDouble() * (radius - radius) + radius;
 
                 Vector3 newPosition = new Vector3(startPosition.x + rndX, startPosition.y + rndY, startPosition.z + rndZ);
 
