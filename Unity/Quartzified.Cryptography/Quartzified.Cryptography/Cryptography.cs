@@ -55,5 +55,17 @@ namespace Quartzified.Cryptography
             }
         }
 
+        public class Sha256
+        {
+            public static string Hash(string input)
+            {
+                SHA256 sha256 = SHA256.Create();
+
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                return BitConverter.ToString(bytes).Replace("-", string.Empty);
+            }
+        }
+
     }
 }
