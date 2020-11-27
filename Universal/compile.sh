@@ -1,16 +1,93 @@
 #!/bin/bash
 IFS=$(echo -en "\n\b")
+reroute="3>&1 1>&2 2>&3"
 
-# Argument handling
-case $1 in
-	help | -help | --help | -h)
-		echo "Usage: generate_universal.sh [path to Quartzified Unity solution directory]"
-		;;
-	"")
-		echo "No path given! Defaulting to ../Unity"
-		solutionPath="../Unity"
-		;;
-esac
+# Functions
+_checkSDKs()
+{
+	echo "Checking available SDKs"
+	SDKlist=$(dotnet --list-sdks | awk '{print $1}')
+	echo "$SDKlist"
+}
+
+_PathQuit()
+{
+	echo "Path is still invalid.. Quitting"
+	exit 0
+}
+
+_wrongPath()
+{
+	echo "Invalid path"
+	defaultPath=$(whiptail --inputbox --nocancel "The default path (../Unity) wasn't valid. Please input valid path to the Quartzified Unity git directory" 10 50 3>&1 1>&2 2>&3)
+
+	# Get list of components
+	components=$(ls $defaultPath | sed '/-/d')
+
+	# Check if the path was correct
+	echo "$components" | grep "Quartzified" || _PathQuit
+}
+
+# Ask what version to compile (unity / universal)
+version=$(whiptail --radiolist --notags "Select version" 10 30 2 "unity" "Unity" 1 "universal" "Universal" 0 3>&1 1>&2 2>&3)
+
+# Ask if the user wants to customize components
+whiptail --yesno "By default the library file will contain everything. If you want to, you can customize the components. Do you want to compile with default settings?" 10 50 3>&1 1>&2 2>&3 && isDefault="yes" || isDefault="no"
+
+# Get path to Unity directory
+defaultPath="../Unity"
+
+# Get list of components
+components=$(ls $defaultPath | sed '/-/d')
+
+# Check if the path was correct
+echo "$components" | grep "Quartzified" && _wrongPath
+
+# Customize components
+if [[ "$isDefault" == "no" ]]
+then
+	compClean=$(echo "$components" | sed 's/\./_/g')
+	selectList=""
+	for ELEMENT in $compClean
+	do
+		selectList+="${ELEMENT} ${ELEMENT} 1 "
+	done
+
+	selectedComponents=$(echo $selectList | xargs whiptail --nocancel --notags --checklist "Select components" 14 50 6 3>&1 1>&2 2>&3)
+fi
+
+# Check if dotnet is installed and if it is, check what SDKs are available
+_checkSDKs || echo dotnet is required for compiling || exit 0
+
+# Generate args from SDK list
+SDKarg=""
+firstSDK="true"
+for i in $SDKlist
+do
+	# Set the first SDK in the list automatically enabled
+	if [[ "$firstSDK" == "true" ]]
+	then
+		SDKarg+="${i} ${i} 1 "
+		firstSDK="false"
+	else
+		SDKarg+="${i} ${i} 0 "
+	fi
+done
+
+# Select SDK
+echo $SDKarg | xargs whiptail --notags --nocancel --radiolist "Select target SDK" 12 40 3
+
+## Argument handling
+#case $1 in
+#	help | -help | --help | -h)
+#		echo "Usage: generate_universal.sh [path to Quartzified Unity solution directory]"
+#		;;
+#	"")
+#		#echo "No path given! Defaulting to ../Unity"
+#		#solutionPath="../Unity"
+#		exit 0
+#		;;
+#esac
 
 # If there's a path given, set the path to given path
 [ -z $solutionPath ] && solutionPath=$1
