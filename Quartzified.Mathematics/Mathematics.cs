@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Quartzified.Mathematics
 {
@@ -629,6 +630,19 @@ namespace Quartzified.Mathematics
             return value;
         }
 
+        public static float Remap(float value, float f1, float t1, float f2, float t2)
+        {
+            return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
+        }
+        public static double Remap(double value, double f1, double t1, double f2, double t2)
+        {
+            return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
+        }
+        public static decimal Remap(decimal value, decimal f1, decimal t1, decimal f2, decimal t2)
+        {
+            return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
+        }
+
         public class Random
         {
             /// <summary>
@@ -712,6 +726,137 @@ namespace Quartzified.Mathematics
                 double rnd = GetRandom(min, max);
 
                 return rnd < threshold ? true : false;
+            }
+        }
+
+        public class Round
+        {
+            /// <summary>
+            /// Round value to the Nearast Half
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static float RoundToNearestHalf(float value)
+            {
+                return Mathf.Round(value * 2f) * 0.5f;
+            }
+
+            /// <summary>
+            /// Round Vector3 to the Nearast Half
+            /// </summary>
+            /// <param name="vector3"></param>
+            /// <returns></returns>
+            public static Vector3 RoundToNearestHalf(Vector3 vector3)
+            {
+                return new Vector3(RoundToNearestHalf(vector3.x), RoundToNearestHalf(vector3.y), RoundToNearestHalf(vector3.z));
+            }
+        }
+
+        public class Distance
+        {
+            /// <summary>
+            /// Calculates the Manhattan distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static int ManhattanDistance(int x1, int y1, int x2, int y2)
+            {
+                return Mathf.Abs(x1 - x2) + Mathf.Abs(y1 - y2);
+            }
+            /// <summary>
+            /// Calculates the Manhattan distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static float ManhattanDistance(float x1, float y1, float x2, float y2)
+            {
+                return Mathf.Abs(x1 - x2) + Mathf.Abs(y1 - y2);
+            }
+            /// <summary>
+            /// Calculates the Manhattan distance between two points.
+            /// </summary>
+            /// <param name="a">The first Vector3 coordinates</param>
+            /// <param name="b">The second Vector3 coordinates</param>
+            /// <returns></returns>
+            public static float ManhattanDistance(Vector3 a, Vector3 b)
+            {
+                return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
+            }
+
+            /// <summary>
+            /// Calculates the Euclidean distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static int EuclideanDistance(int x1, int y1, int x2, int y2)
+            {
+                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+            }
+            /// <summary>
+            /// Calculates the Euclidean distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static float EuclideanDistance(float x1, float y1, float x2, float y2)
+            {
+                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+            }
+            /// <summary>
+            /// Calculates the Euclidean distance between two points.
+            /// </summary>
+            /// <param name="a">The first Vector3 coordinates</param>
+            /// <param name="b">The second Vector3 coordinates</param>
+            /// <returns></returns>
+            public static float EuclideanDistance(Vector3 a, Vector3 b)
+            {
+                return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z);
+            }
+
+            /// <summary>
+            /// Calculates the Chebyshev distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static int ChebyshevDistance(int x1, int y1, int x2, int y2)
+            {
+                return Mathf.Max(Mathf.Abs(x2 - x1), Mathf.Abs(y2 - y1));
+            }
+            /// <summary>
+            /// Calculates the Chebyshev distance between two points.
+            /// </summary>
+            /// <param name="x1">The first x coordinate</param>
+            /// <param name="y1">The first y coordinate</param>
+            /// <param name="x2">The second x coordinate</param>
+            /// <param name="y2">The second y coordinate</param>
+            /// <returns></returns>
+            public static float ChebyshevDistance(float x1, float y1, float x2, float y2)
+            {
+                return Mathf.Max(Mathf.Abs(x2 - x1), Mathf.Abs(y2 - y1));
+            }
+            /// <summary>
+            /// Calculates the Chebyshev distance between two points.
+            /// </summary>
+            /// <param name="a">The first Vector3 coordinates</param>
+            /// <param name="b">The second Vector3 coordinates</param>
+            /// <returns></returns>
+            public static float ChebyshevDistance(Vector3 a, Vector3 b)
+            {
+                return Mathf.Max(Mathf.Abs(b.x - a.x), Mathf.Abs(b.y - a.y), Mathf.Abs(b.z - a.z));
             }
         }
     }
